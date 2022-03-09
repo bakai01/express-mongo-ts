@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  express-api:
+    build: .
+    command: npm run start
+    restart: unless-stopped
+    depends_on:
+      - express-mongo
+    ports:
+      - "1337:1337"
+    environment:
+      - PORT=1337
+      - HOST=localhost
+      - MONGODB_URI=mongodb://express-mongo:27017/mongodb-rest-api
+
+  express-mongo:
+    image: mongo:latest
+    volumes:
+      - express-mongodb:/data/db
+
+volumes:
+  express-mongodb:

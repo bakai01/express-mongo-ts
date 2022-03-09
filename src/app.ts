@@ -6,7 +6,6 @@ import { connect } from './database/connect';
 import { router } from './routes';
 
 const PORT = config.get('PORT') as number;
-const HOST = config.get('HOST') as string;
 
 const app = express();
 
@@ -18,7 +17,7 @@ const bootstrap = async () => {
   try {
     await connect();
 
-    app.listen(PORT, HOST, () => log.info(`Server listening on port: ${PORT}`));
+    app.listen(PORT, () => log.info(`Server listening on port: ${PORT}`));
   } catch (err) {
     console.error(err);
   }

@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  express-api:
+    command: npm run start:dev
+    volumes:
+      - ./src:/usr/src/app/src
