@@ -21,14 +21,14 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
   let user = this as UserDocument;
 
   // only hash the password if it has been modified (or is new)
-  if (!user.isModified("password")) return next();
+  if (!user.isModified('password')) return next();
 
   // Random additional data
-  const salt = await genSalt(config.get("saltWorkFactor"));
+  const salt = await genSalt(Number(config.get('saltWorkFactor')));
 
   // Replace the password with the hash
   user.password = await hash(user.password, salt);
