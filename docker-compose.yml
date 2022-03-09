@@ -13,6 +13,10 @@ services:
       - PORT=1337
       - HOST=localhost
       - MONGODB_URI=mongodb://express-mongo:27017/mongodb-rest-api
+      - SALT_WORK_FACTOR=10
+      - ACCESS_TOKEN_TTL=10m
+      - REFRESH_TOKEN_TTL=3600
+      - PRIVATE_KEY=secretKey
 
   express-mongo:
     image: mongo:latest

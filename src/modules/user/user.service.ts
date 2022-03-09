@@ -1,4 +1,5 @@
 import { DocumentDefinition } from 'mongoose';
+import { omit } from 'lodash';
 
 import { User, UserDocument } from './user.model';
 
@@ -13,6 +14,22 @@ class Service {
 
   async find() {
 
+  }
+
+  async validatePassword({ email, password }: { email: UserDocument['email']; password: string; }) {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return false;
+    }
+
+    const isValid = await user.comparePassword(password);
+
+    if (!isValid) {
+      return false;
+    }
+
+    return omit(user.toJSON(), 'password');
   }
 }
 
