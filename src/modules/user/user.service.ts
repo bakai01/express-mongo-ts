@@ -1,9 +1,19 @@
+import { DocumentDefinition } from 'mongoose';
+
 import { User, UserDocument } from './user.model';
 
-class UserService {
-  async create() {
+class Service {
+  async create(input: DocumentDefinition<UserDocument>) {
+    try {
+      return await User.create(input);
+    } catch (err: any) {
+      throw new Error(err);
+    }
+  }
+
+  async find() {
 
   }
 }
 
-export { UserService };
+export const UserService = new Service;
