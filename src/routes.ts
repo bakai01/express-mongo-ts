@@ -20,4 +20,7 @@ export const router = (app: Express) => {
 
   // Logout
   app.delete('/api/sessions', requiresUser, SessionController.invalidateUserSession);
+
+  // Get all sessions
+  app.get('/api/sessions/all', SessionController.getAll);
 };

@@ -51,6 +51,10 @@ class Service {
   async getUserSessions(query: FilterQuery<SessionDocument>) {
     return Session.find(query).lean();
   }
+
+  async getAll() {
+    return Session.find();
+  }
 }
 
 export const SessionService = new Service;

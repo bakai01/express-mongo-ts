@@ -51,6 +51,11 @@ class Controller {
 
     return res.send(sessions);
   }
+
+  async getAll(req: Request, res: Response) {
+    const sessions = await SessionService.getAll();
+    return res.send(sessions);
+  }
 }
 
 export const SessionController = new Controller;
