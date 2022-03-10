@@ -1,6 +1,6 @@
 import { Express, Request, Response } from 'express';
 
-import { validateRequest } from './middleware/validate-request';
+import { validateRequest, requiresUser } from './middleware';
 import { UserController } from './modules/user/user.controller';
 import { createUserSchema } from './modules/user/user.schema';
 import { createUserSessionSchema } from './modules/session/session.schema';
@@ -16,5 +16,8 @@ export const router = (app: Express) => {
   app.post('/api/sessions', validateRequest(createUserSessionSchema), SessionController.createUserSession);
 
   // Get users sessions
+  app.get('/api/sessions', requiresUser, SessionController.getUserSessions);
+
   // Logout
+  app.delete('/api/sessions', requiresUser, SessionController.invalidateUserSession);
 };
